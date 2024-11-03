@@ -1,0 +1,1868 @@
+openapi: 3.1.0
+info:
+  title: API de operaciónd de tienda RepueStock
+  version: 1.0.0
+paths
+  /usuarios:
+  post:
+    summary: Registrar un usuario
+    description: Crear un usuario de rol cliente en la base de datos
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              nombre:
+                type: string
+              telefono:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+    responses:
+      '201':
+        description: Usuario creado correctamente
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre:
+                  type: string
+      '400':
+        description: Solicitud incorrecta
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '404':
+        description: Recurso no encontrado
+        content:
+          application/json:
+        schema:
+          type: object
+          properties:
+            mensaje:
+              type: string
+      '500':
+        description: Error interno del servidor
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '503':
+        description: Servicio no disponible
+        content:
+          application/json:
+        schema:
+          type: object
+          properties:
+            mensaje:
+              type: string
+  get:
+    summary: Obtener todos los usuarios
+    description: Obtener todos los usuarios registrados en la base de datos
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+    responses:
+      '200':
+        description: Usuarios obtenidos correctamente
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  nombre:
+                    type: string
+                  telefono:
+                    type: string
+                  email:
+                    type: string
+                  password:
+                    type: string
+                  rol:
+                    type: string
+                  bloqueado:
+                    type: boolean
+                  activo:
+                    type: boolean
+                  fecha_creacion:
+                    type: string
+      '400':
+        description: Solicitud incorrecta
+        content:
+          application/json:
+        schema:
+          type: object
+          properties:
+            mensaje:
+              type: string
+      '401':
+        description: No tiene autorización
+        content:
+          application/json:
+        schema:
+          type: object
+          properties:
+            mensaje:
+              type: string
+      '403':
+        description: Prohibido el acceso
+        content:
+          application/json:
+        schema:
+          type: object
+          properties:
+            mensaje:
+              type: string
+      '404':
+        description: Recurso no encontrado
+        content:
+          application/json:
+        schema:
+          type: object
+          properties:
+            mensaje:
+              type: string
+      '500':
+        description: Error interno del servidor
+        content:
+          application/json:
+        schema:
+          type: object
+          properties:
+            mensaje:
+              type: string
+      '503':
+        description: Servicio no disponible
+        content:
+          application/json:
+        schema:
+          type: object
+          properties:
+            mensaje:
+              type: string
+  /usuarios/{id}:
+    get:
+      summary: Obtener un usuario
+      description: Obtener un usuario de la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del usuario
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Usuario obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  nombre:
+                    type: string
+                  telefono:
+                    type: string
+                  email:
+                    type: string
+                  password:
+                    type: string
+                  rol:
+                    type: string
+                  bloqueado:
+                    type: boolean
+                  activo:
+                    type: boolean
+                  fecha_creacion:
+                    type: string
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+    put:
+      summary: Actualizar un usuario
+      description: Actualizar un usuario registrado en la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del usuario
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                nombre:
+                  type: string
+                telefono:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                rol:
+                  type: string
+                bloqueado:
+                  type: boolean
+                activo:
+                  type: boolean
+      responses:
+        '200':
+          description: Usuario actualizado correctamente
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              nombre:
+                type: string
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+    delete:
+      summary: Eliminar un usuario
+      description: Eliminar un usuario de la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del usuario
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Usuario eliminado correctamente
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+  /direcciones:
+  post:
+    summary: Registrar una dirección
+    description: Crear una nueva dirección en la base de datos
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              nombre:
+                type: string
+              calle:
+                type: string
+              detalle:
+                type: string
+              codigo_postal:
+                type: string
+              comuna:
+                type: string
+              region:
+                type: string
+              rut:
+                type: string
+              razon_social:
+                type: string
+              giro:
+                type: string
+              id_usuario:
+                type: integer
+              contacto:
+                type: string
+    responses:
+      '201':
+        description: Dirección creada correctamente
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre:
+                  type: string
+      '400':
+        description: Solicitud incorrecta
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '404':
+        description: Recurso no encontrado
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '500':
+        description: Error interno del servidor
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '503':
+        description: Servicio no disponible
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+  get:
+    summary: Obtener todas las direcciones, y filtrar en caso que se envíe un id de usuario
+    description: Obtener todas las direcciones de la base de datos
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+              id_usuario:
+                type: integer
+    responses:
+      '200':
+        description: Direcciones obtenidas correctamente
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  nombre:
+                    type: string
+                  calle:
+                    type: string
+                  detalle:
+                    type: string
+                  codigo_postal:
+                    type: string
+                  comuna:
+                    type: string
+                  region:
+                    type: string
+                  rut:
+                    type: string
+                  razon_social:
+                    type: string
+                  giro:
+                    type: string
+                  id_usuario:
+                    type: integer
+                  contacto:
+                    type: string
+      '400':
+        description: Solicitud incorrecta
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '401':
+        description: No tiene autorización
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '403':
+        description: Prohibido el acceso
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '404':
+        description: Recurso no encontrado
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '500':
+        description: Error interno del servidor
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '503':
+        description: Servicio no disponible
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+  /direcciones/{id}:
+    get:
+      summary: Obtener una dirección
+      description: Obtener una dirección de la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la dirección
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Dirección obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  nombre:
+                    type: string
+                  calle:
+                    type: string
+                  detalle:
+                    type: string
+                  codigo_postal:
+                    type: string
+                  comuna:
+                    type: string
+                  region:
+                    type: string
+                  rut:
+                    type: string
+                  razon_social:
+                    type: string
+                  giro:
+                    type: string
+                  id_usuario:
+                    type: integer
+                  contacto:
+                    type: string
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+          schema:
+            type: object
+            properties:
+              mensaje:
+                type: string
+    put:
+      summary: Actualizar una dirección
+      description: Actualizar una dirección registrada en la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la dirección
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                nombre:
+                  type: string
+                calle:
+                  type: string
+                detalle:
+                  type: string
+                codigo_postal:
+                  type: string
+                comuna:
+                  type: string
+                region:
+                  type: string
+                rut:
+                  type: string
+                razon_social:
+                  type: string
+                giro:
+                  type: string
+                id_usuario:
+                  type: integer
+                contacto:
+                  type: string
+      responses:
+        '200':
+          description: Dirección actualizada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  nombre:
+                    type: string
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+    delete:
+      summary: Eliminar una dirección
+      description: Eliminar una dirección de la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la dirección
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Dirección eliminada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+  /productos:
+  post:
+    summary: Registrar un producto
+    description: Crear un nuevo producto en la base de datos
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+              sku:
+                type: string
+              id_marca:
+                type: integer
+              descripcion:
+                type: string
+              comentarios:
+                type: string
+              foto:
+                type: string
+              id_moneda:
+                type: integer
+              precio:
+                type: number
+              disponible:
+                type: number
+              id_bodega:
+                type: integer
+              compatibilidad:
+                type: array
+                items:
+                  type: integer
+    responses:
+      '201':
+        description: Producto creado correctamente
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                descripcion:
+                  type: string
+      '400':
+        description: Solicitud incorrecta
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '404':
+        description: Recurso no encontrado
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '500':
+        description: Error interno del servidor
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+      '503':
+        description: Servicio no disponible
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mensaje:
+                  type: string
+    get:
+      summary: Obtener todos los productos
+      description: Obtener todos los productos de la base de datos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Productos obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    sku:
+                      type: string
+                    id_marca:
+                      type: integer
+                    descripcion:
+                      type: string
+                    comentarios:
+                      type: string
+                    foto:
+                      type: string
+                    id_moneda:
+                      type: integer
+                    precio:
+                      type: number
+                    disponible:
+                      type: number
+                    id_bodega:
+                      type: integer
+                    compatibilidad:
+                      type: array
+                      items:
+                        type: integer
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+  /productos/{id}:
+    get:
+      summary: Obtener un producto
+      description: Obtener un producto de la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Producto obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  sku:
+                    type: string
+                  id_marca:
+                    type: integer
+                  descripcion:
+                    type: string
+                  comentarios:
+                    type: string
+                  foto:
+                    type: string
+                  id_moneda:
+                    type: integer
+                  precio:
+                    type: number
+                  disponible:
+                    type: number
+                  id_bodega:
+                    type: integer
+                  compatibilidad:
+                    type: array
+                    items:
+                      type: integer
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+    put:
+      summary: Actualizar un producto
+      description: Actualizar un producto de la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                sku:
+                  type: string
+                id_marca:
+                  type: integer
+                descripcion:
+                  type: string
+                comentarios:
+                  type: string
+                foto:
+                  type: string
+                id_moneda:
+                  type: integer
+                precio:
+                  type: number
+                disponible:
+                  type: number
+                id_bodega:
+                  type: integer
+                compatibilidad:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Producto actualizado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  descripcion:
+                    type: string
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+    delete:
+      summary: Eliminar un producto
+      description: Eliminar un producto de la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Producto eliminado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+  /carros:
+    post:
+      summary: Registrar un carro
+      description: Crear un nuevo carro en la base de datos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                id_usuario:
+                  type: integer
+                fecha_creacion:
+                  type: string
+                productos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id_producto:
+                        type: integer
+                      cantidad:
+                        type: integer
+      responses:
+        '201':
+          description: Carro creado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+    get:
+      summary: Obtener todos los carros
+      description: Obtener todos los carros de la base de datos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Carros obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  id_usuario:
+                    type: integer
+                  activo:
+                    type: boolean
+                  comprado:
+                    type: boolean
+                  fecha_creacion:
+                    type: string
+                  productos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id_producto:
+                          type: integer
+                        cantidad:
+                          type: integer
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+  /carros/{id}:
+    get:
+      summary: Obtener un carro
+      description: Obtener un carro de la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del carro
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Carro obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  id_usuario:
+                    type: integer
+                  activo:
+                    type: boolean
+                  comprado:
+                    type: boolean
+                  fecha_creacion:
+                    type: string
+                  productos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id_producto:
+                          type: integer
+                        cantidad:
+                          type: integer
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+    put:
+      summary: Actualizar un carro
+      description: Actualizar un carro en la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del carro
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                id_usuario:
+                  type: integer
+                activo:
+                  type: boolean
+                comprado:
+                  type: boolean
+                productos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id_producto:
+                        type: integer
+                      cantidad:
+                        type: integer
+      responses:
+        '200':
+          description: Carro actualizado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  id_usuario:
+                    type: integer
+                  activo:
+                    type: boolean
+                  comprado:
+                    type: boolean
+                  productos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id_producto:
+                          type: integer
+                        cantidad:
+                          type: integer
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+    delete:
+      summary: Eliminar un carro
+      description: Eliminar un carro de la base de datos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del carro
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Carro eliminado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '400':
+          description: Solicitud incorrecta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '401':
+          description: No tiene autorización
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '403':
+          description: Prohibido el acceso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+        '503':
+          description: Servicio no disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
