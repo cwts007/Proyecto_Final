@@ -1,0 +1,156 @@
+#root {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+}
+header .navbar {
+  min-height: 6rem;
+}
+header .navbar-nav .nav-link {
+  color: white !important;
+}
+header .navbar .logo {
+  height: 80px;
+}
+header .navbar .container {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+header {
+  text-align: center;
+}
+
+footer .container {
+  margin-left: 50px;
+  margin-right: 50px;
+  text-align: left;
+}
+footer .container .titulo {
+  font-size: 1rem;
+  text-align: left;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+}
+footer .container .texto {
+  font-size: 0.8rem;
+  text-decoration: none;
+  font-weight: lighter;
+  margin: 0;
+  text-decoration: none;
+}
+footer .coordenadas {
+  margin: 0 0 1rem 0;
+}
+
+.hero {
+  height: 550px;
+  min-height: 500px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); 
+}
+.hero img {
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+}
+.hero .hero-texts {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+  width: 80%;
+}
+.hero .hero-text {
+  color: white;
+  font-size: 3em;
+  margin: 1rem 0px 0px 0px;
+  padding: 0px;
+  font-weight: 500;
+}
+.hero .hero-tag {
+  color: white;
+  font-size: 1.5em;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 0 0 12px;
+  margin: 20px 50px;
+}
+main .textos-home {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+main .texto-home {
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+main .main-titulo {
+  font-size: 2rem;
+  margin: 2rem 0 0 0;
+  padding: 0;
+  font-weight: bold;
+}
+main .acceso .form-group,
+main .registro .form-group {
+  margin: 0 0 1rem 0;
+} 
+main .form-group label {
+  text-align: left;
+  display: block;
+}
+main .registro .form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3rem;
+}
+
+@media (min-width: 1200px) {
+  header .navbar .container {
+    max-width: 100%;
+  }
+}
